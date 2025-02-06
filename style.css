@@ -1,0 +1,252 @@
+/* Style global */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color:  #0C0B08;
+  text-align: center;
+}
+
+/* Barre en haut */
+header {
+  background-color: #0098FF;
+  padding: 20px;
+  height: 70px;
+  font-size: 18px;
+  font-weight: bold;
+  border-bottom-right-radius: 50px;
+  border-bottom-left-radius: 50px;
+
+  position: relative;
+  top: 60px; /* Ajuste cette valeur pour descendre le header */
+  text-align: center;
+
+  line-height: 0px; /* Ajuste l'espacement vertical du texte */
+  box-sizing: border-box; /* Inclut le padding dans la hauteur */
+  
+}
+
+header::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 0;
+  width: 100%;
+  height: 3px; /* Épaisseur du trait */
+  background-color: #bbb80d; /* Couleur du trait */
+}
+
+#nameofthegame{
+  color: aliceblue;
+}
+
+/* ?? */
+.button-container {
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+  gap: 20px;
+}
+
+
+button {
+  width: 250px;
+  height: 60px;
+  padding: 15px;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  border-top-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+  cursor: pointer;
+  transition: 0.3s;
+  background-color: #F4EDD3;
+}
+
+.circle {
+  width: 70px; /* Taille du cercle */
+  height: 70px; /* Taille du cercle */
+  background-color: #fff; /* Fond du cercle */
+  border-radius: 50%; /* Forme circulaire */
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  margin-left: 3px;
+
+}
+
+.circle img {
+  
+    width: 65px; /* Ajuste la taille selon tes besoins */
+    height: 65px;
+    border-radius: 50%;
+    object-fit: cover; /* Permet de bien ajuster l'image dans le cercle */
+
+}
+
+table {
+  align-self: center;
+  margin-top: 250px;
+  width: 0%; /* Ajustez selon la largeur que vous voulez pour votre tableau */
+  border-collapse: collapse; /* Pour enlever les espaces entre les cellules */
+}
+
+td {
+  
+  padding: 10px;
+  text-align: center; /* Centre le contenu horizontalement */
+  vertical-align: middle; /* Centre verticalement les éléments dans les cellules */
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+/*
+.game-container{
+  color: #0b0c0b;
+} */
+
+/*le text du button recommender */
+#reset{
+  background-color: #bbb80d;
+  width: 100px;
+  height: 50px;
+  margin: 8px;
+  border-top-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+}
+
+/*le text du button revenir au home */
+#returne{
+  background-color: #bbb80d;
+  width: 100px;
+  height: 50px;
+  margin: 8px;
+  border-top-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+}
+
+#delete{
+  background-color: #bbb80d;
+  width: 100px;
+  height: 50px;
+  margin: 8px;
+  border-top-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+
+}
+
+/*le nom de la catygory choisit*/
+.section-name{
+  color: #fff;
+}
+
+/*??*/
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.question-section {
+  background-color: #bbb80d;
+  padding: 1.5rem;
+  border-radius: 3px;
+}
+
+/*la reponce*/
+.answer-slots {
+  color: #fff;
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  justify-content: center;
+}
+
+/*place t3 reponce*/
+.slot {
+  margin-bottom: 5px;
+  height: 40px;
+  width: 40px;
+  border-bottom: 1px solid #bbb80d;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.slot:hover {
+  background-color: #dbed8c;
+}
+
+.letters-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.5rem;
+  padding: 1rem;
+  background-color: #2d2d2d;
+  border-radius: 12px;
+}
+
+.letter-btn {
+  width: 50px;
+  height: 50px;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 10px;
+  background-color: #0098FF;
+  color: white;
+  border: none;
+  padding: 1rem;
+  border-radius: 3px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.letter-btn:hover {
+  background-color: #0099ffa4;
+}
+
+.letter-btn.used {
+  background-color: #F4EDD3 !important;
+  color: #4d4d4d;
+  cursor: not-allowed;
+}
+
+.letter-btn.correct {
+  border-radius: 50px;
+  background-color: #2ecc71 !important;
+}
+
+.letter-btn.incorrect {
+  background-color: #e74c3c !important;
+}
+
+#question-text {
+  color: #fff;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.rectangle-border {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  border: 5px solid rgb(0, 0, 0); /* Épaisseur du trait */
+  pointer-events: none; /* Pour éviter que le cadre n'interfère avec les autres éléments */
+}
+
+
+
