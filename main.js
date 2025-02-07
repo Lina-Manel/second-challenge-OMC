@@ -169,7 +169,7 @@ function generateLetters(answer) {
   const allLetters = [...answerLetters, ...randomLetters].sort(() => Math.random() - 0.5);
   lettersContainer.innerHTML = "";
 
-  // Créer une grille de 5x3
+  // Créer une grille de 4x3
   for (let i = 0; i < 3; i++) {
     const row = document.createElement("div");
     row.className = "letter-row";
