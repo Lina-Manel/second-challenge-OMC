@@ -126,7 +126,7 @@ function generateLetters(answer) {
 
   const answerLetters = answer.split(""); // Pas besoin de .toUpperCase() pour l'arabe
   const randomLetters = [];
-  const rest = 15 - answer.length;
+  const rest = 12 - answer.length;
 
   if (currentCategory === "hamas" || currentCategory === "bkri") {
     // Générer des lettres arabes aléatoires
