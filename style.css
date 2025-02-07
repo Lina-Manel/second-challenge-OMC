@@ -230,7 +230,15 @@ button:hover {
     height: 5vw;
   }
 
-  
+  .letters-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 4 colonnes fixes */
+    gap: 3vw; /* Augmenter l'espace entre les lettres */
+    padding: 2rem;
+    width: 90vw; /* Augmenter la largeur */
+    height: auto; /* Ajustement automatique */
+    justify-content: center;
+  }
   
   
 }
