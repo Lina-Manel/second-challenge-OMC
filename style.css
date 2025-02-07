@@ -220,16 +220,47 @@ button:hover {
   }
 
   .letter-btn {
-    width: 18vw;
-    height: 18vw;
+    width: 17vw;
+    height: 17vw;
     font-size: 2rem;
   }
 
   .slot {
-    width: 5vw;
-    height: 5vw;
+    width: 8vw;
+    height: 8vw;
   }
 
+  #reset, #returne, #delete {
+    width: 20vw;
+    height: 8vh;
+    margin: 1vh;
+    border-top-left-radius: 5vw;
+    border-bottom-right-radius: 5vw;
+  }
   
+  button {
+  width: 65vw;
+  height: 8vh;
+  padding: 1vh;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border: none;
+  border-top-left-radius: 5vw;
+  border-bottom-right-radius: 5vw;
+  cursor: pointer;
+  transition: 0.3s;
+  background-color: #F4EDD3;
+}
+
+.circle {
+  width: 15vw;
+  height: 15vw;
+  background-color: #fff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: -1vw;
+}
   
 }

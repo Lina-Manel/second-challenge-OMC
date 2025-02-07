@@ -255,3 +255,37 @@ function displayFinalMessage() {
 function getRandomLetter() {
   return String.fromCharCode(Math.floor(Math.random() * 26) + 65);
 }
+
+/*
+document.addEventListener("DOMContentLoaded", function () {
+  const hintBtn = document.querySelector("#hint");
+
+  if (hintBtn) {
+      hintBtn.addEventListener("click", giveHint);
+  }
+});
+
+function giveHint() {
+  if (!currentQuote || !currentQuote.answer) return;
+  
+  const answerArray = currentQuote.answer.split("");
+  const slots = document.querySelectorAll(".answer-slots .slot");
+
+  // Calculate the number of letters to reveal (30% rounded up)
+  const numToReveal = Math.ceil(answerArray.length * 0.3);
+  let revealedIndexes = new Set();
+
+  while (revealedIndexes.size < numToReveal) {
+      const randomIndex = Math.floor(Math.random() * answerArray.length);
+      revealedIndexes.add(randomIndex);
+  }
+
+  revealedIndexes.forEach(index => {
+      slots[index].innerText = answerArray[index];
+      currentAnswer = currentAnswer.substring(0, index) + answerArray[index] + currentAnswer.substring(index + 1);
+  });
+
+  document.querySelector("#hint").disabled = true; // Disable the hint button after one use
+}
+*/
+
