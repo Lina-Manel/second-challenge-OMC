@@ -149,8 +149,8 @@ function generateLetters(answer) {
     row.className = "letter-row";
     lettersContainer.appendChild(row);
     
-    for (let j = 0; j < 5; j++) {
-      const letterIndex = i * 5 + j;
+    for (let j = 0; j < 4; j++) {
+      const letterIndex = i * 4 + j;
       const letter = allLetters[letterIndex];
       
       const letterBtn = document.createElement("button");
