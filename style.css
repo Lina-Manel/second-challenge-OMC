@@ -229,4 +229,11 @@ button:hover {
     width: 10vw;
     height: 10vw;
   }
+
+  .letters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(50px, 1fr)); /* Ajuste la grille */
+    gap: 4vw;
+    padding: 2rem;
+  }
 }
