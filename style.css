@@ -215,5 +215,30 @@ button:hover {
     padding: 1rem;
   }
 
+  .button-container {
+    gap: 1rem;
+  }
+
+  .letter-btn {
+    width: 20vw;
+    height: 20vw;
+    font-size: 2rem;
+  }
+
+  .slot {
+    width: 10vw;
+    height: 10vw;
+  }
+
+  .letters-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 colonnes fixes */
+    gap: 3vw; /* Augmenter l'espace entre les lettres */
+    padding: 2rem;
+    width: 90vw; /* Augmenter la largeur */
+    height: auto; /* Ajustement automatique */
+    justify-content: center;
+  }
+  
   
 }
