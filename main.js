@@ -15,7 +15,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const btnReset = document.querySelector("#reset");
   const btnretun = document.querySelector("#returne");
   const deleteBtn = document.querySelector("#delete");
-  
 
   if (btnOmc) btnOmc.addEventListener("click", () => location.href = "omc.html");
   if (btnBkri) btnBkri.addEventListener("click", () => location.href = "bkri.html");
@@ -127,7 +126,7 @@ function generateLetters(answer) {
 
   const answerLetters = answer.split(""); // Pas besoin de .toUpperCase() pour l'arabe
   const randomLetters = [];
-  const rest = 15 - answer.length;
+  const rest = 12 - answer.length;
 
   if (currentCategory === "hamas" || currentCategory === "bkri") {
     // Générer des lettres arabes aléatoires
@@ -144,14 +143,14 @@ function generateLetters(answer) {
   const allLetters = [...answerLetters, ...randomLetters].sort(() => Math.random() - 0.5);
   lettersContainer.innerHTML = "";
 
-  // Créer une grille de 5x3
+  // Créer une grille de 4x3
   for (let i = 0; i < 3; i++) {
     const row = document.createElement("div");
     row.className = "letter-row";
     lettersContainer.appendChild(row);
     
-    for (let j = 0; j < 5; j++) {
-      const letterIndex = i * 5 + j;
+    for (let j = 0; j < 4; j++) {
+      const letterIndex = i * 4 + j;
       const letter = allLetters[letterIndex];
       
       const letterBtn = document.createElement("button");
@@ -256,38 +255,3 @@ function displayFinalMessage() {
 function getRandomLetter() {
   return String.fromCharCode(Math.floor(Math.random() * 26) + 65);
 }
-
-
-/*
-document.addEventListener("DOMContentLoaded", function () {
-  const hintBtn = document.querySelector("#hint");
-
-  if (hintBtn) {
-      hintBtn.addEventListener("click", giveHint);
-  }
-});
-
-function giveHint() {
-  if (!currentQuote || !currentQuote.answer) return;
-  
-  const answerArray = currentQuote.answer.split("");
-  const slots = document.querySelectorAll(".answer-slots .slot");
-
-  // Calculate the number of letters to reveal (30% rounded up)
-  const numToReveal = Math.ceil(answerArray.length * 0.3);
-  let revealedIndexes = new Set();
-
-  while (revealedIndexes.size < numToReveal) {
-      const randomIndex = Math.floor(Math.random() * answerArray.length);
-      revealedIndexes.add(randomIndex);
-  }
-
-  revealedIndexes.forEach(index => {
-      slots[index].innerText = answerArray[index];
-      currentAnswer = currentAnswer.substring(0, index) + answerArray[index] + currentAnswer.substring(index + 1);
-  });
-
-  document.querySelector("#hint").disabled = true; // Disable the hint button after one use
-}
-*/
-
