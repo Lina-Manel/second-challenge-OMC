@@ -20,13 +20,19 @@ document.addEventListener("DOMContentLoaded", function () {
   if (btnBkri) btnBkri.addEventListener("click", () => location.href = "bkri.html");
   if (btnHamas) btnHamas.addEventListener("click", () => location.href = "hamas.html");
   if (btnReset) btnReset.addEventListener("click", startNewRound);
-  document.querySelector("#returne").addEventListener("click", () => {
-    displayFinalMessage(); // Affiche la plaque
+  let gameStarted = false; // Tracks if the player has answered at least once
 
-    setTimeout(() => {
-        window.location.href = "index.html"; // Redirection après un délai
-    }, 3000); // 3000 ms = 3 secondes
- });
+document.querySelector("#returne").addEventListener("click", () => {
+    if (!gameStarted) {
+        window.location.href = "index.html"; // Instantly return if the player hasn't started
+    } else {
+        displayFinalMessage(); // Show final message before returning
+
+        setTimeout(() => {
+            window.location.href = "index.html"; // Delayed return if they played
+        }, 2000);
+    }
+});
  
 });
 
@@ -35,7 +41,6 @@ const quotesByCategory = {
       { question: "Ce qui ne se ...... pas se perd !", answer: "partage" },
       { question: "Faouzi, next .... please !", answer: "slide" },
       { question: ".... ro7k !", answer: "zyr" },
-      { question: "fi ...", answer: "lhakika" },
       { question: ".... chabiba", answer: "rigl" },
       { question: "Coucou les ....", answer: "loulou" },
       { question: "Matnsawch tdoukhlou team .... the best", answer: "marketing" },
@@ -43,17 +48,32 @@ const quotesByCategory = {
 
   ],
   bkri: [
-      { question: " العود لي تحقرو ....", answer: "يعميك" },
-      { question: "لي يحب ... ينوض بكري", answer: "العكري" },
-      { question: "لي يبات مع ... ينوض يقاقي", answer: "الجاج" },
-      { question: "لي ما يعرفكش يا ... بلادي يقول عليك بانان", answer: "خروب" },
-  ],
-  hamas: [
-      { question: "L'union fait la ...... !", answer: "force" },
-      { question: "Il ne faut pas vendre la peau de l'ours avant de l'avoir ...... !", answer: "tué" },
-      { question: "Un tiens vaut mieux que deux tu ...... !", answer: "l'auras" }
-  ]
+    { question: " العود لي تحقرو ....", answer: "يعميك" },
+    { question: "لي يحب ... ينوض بكري", answer: "العكري" },
+    { question: "لي يبات مع ... ينوض يقاقي", answer: "الجاج" },
+    { question: "لي ما يعرفكش يا ... بلادي يقول عليك بانان", answer: "خروب" },
+    { question: "لي ماشي ليك ... " ,answer: "يعييك" },
+    { question: "مول .... ويحتاج",  answer: "التاج" },
+    { question: "...وحدة ماتصفق", answer: "يد" },
+    { question: "من عندي ومن عندك ... وإلا غير من عندي تنقطع ", answer: "تنطبع" },
+],
+hamas: [
+    { question: "قال القائد اسماعيل: لو خضعت كل الدنيا لن ... بإسرائيل", answer: "نعترف" },
+    { question: "قال الشهيد اشرف نافع عندما اقتلعت عينه: رجعتلك ... يا هلس", answer: "قبطان" },
+    { question: "قال الشهيد عبد الكريم الحاج: ...والله ولعت", answer: "ولعت" },
+    { question: "قال القائد الشهيد يحيى السنوار: نحن قوم نعشق ... كما يعشق أعداؤنا الحياة", answer: "الموت" },
+    { question: "قال القائد الشهيد محمد الضيف: العدو لا يفهم إلا لغة ...", answer: "القوة" },
+    { question: "قال القائد الشهيد عبد الرحمن حن الشامي: إذا كانت ... هي دربنا إلى الشهادة فلن نتأخر في التضحية", answer: "القدس" },
+    { question: "قال القائد الشهيد خالد مشعل: ... حق مشروع لشعبنا", answer: "المقاومة" },
+    { question: "قال القائد الشهيد أحمد ياسين: نحن واليهود في صراع على هذا ...، فإما أن يأخذه اليهود منا، أو ننقذه من أيدي اليهود", answer: "الجيل" },
+    
+]
 };
+
+const correctSound = new Audio("correct.mp3");
+const wrongSound = new Audio("wrong.mp3");
+const finishSound = new Audio("final.mp3");
+
 
 let usedQuotes = [];
 let currentQuote;
@@ -73,7 +93,7 @@ function getRandomQuote() {
   // Vérifier si toutes les citations ont été utilisées
   if (usedQuotes.length === quotes.length) {
       displayFinalMessage(); // Afficher le message de fin
-      return null; // Plus de citations disponibles
+      return null; // khlassou les  citations
   }
 
   let newQuote;
@@ -86,6 +106,11 @@ function getRandomQuote() {
 }
 
 function startNewRound() {
+  // Si l'utilisateur n'a pas répondu et qu'il y avait une question en cours, on considère cette partie comme perdue
+  if (currentAnswer.length === 0 && currentQuote) {
+      lose++;
+  }
+
   currentQuote = getRandomQuote();
 
   if (!currentQuote) {
@@ -107,6 +132,7 @@ function startNewRound() {
   generateSlots(currentQuote.answer);
   generateLetters(currentQuote.answer);
 }
+
 
 function generateSlots(answer) {
   const slotsContainer = document.querySelector(".answer-slots");
@@ -210,43 +236,106 @@ document.addEventListener("DOMContentLoaded", function () {
 
   win = 0; 
   lose = 0;
+ // Shuffle function to randomize an array
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+// Lists of messages
+let correctMessages = [
+  "🎉 Boom! Nailed it! You’re on fire! 🔥😎",
+  "🌟 Genius mode activated! Keep it up! 🚀",
+  "🎯 Bullseye! That was a perfect shot! 🎯",
+  "🔥 You’re unstoppable! Are you even human?!",
+  "💡 Smart move! You must have a big brain! 🧠",
+  "✨ Correct! Your IQ just went up by 10 points! 📈",
+  "🎶 Like a pro! You should be on a game show! 🎤",
+  "💥 Boom! Another one bites the dust! 😆"
+];
+
+let wrongMessages = [
+  "❌ Oops! That was a plot twist… but not the good kind! 😂",
+  "😅 Oof! That one hurt! Try again!",
+  "🙈 Oopsie daisy! That wasn’t it!",
+  "🤔 Hmmm… maybe next time?",
+  "🛑 Wrong turn! Try another path!",
+  "🎭 That was unexpected… and not in a good way! 😆",
+  "🚨 Alert! Your answer has been rejected by the universe! 😂",
+  "🥴 That was close… but nope!"
+];
+
+// Shuffle the messages at the start
+shuffleArray(correctMessages);
+shuffleArray(wrongMessages);
+
+// Index trackers
+let correctIndex = 0;
+let wrongIndex = 0;
+
 function checkGameStatus() {
-  
   const message = document.querySelector("#message");
   if (!message) return;
 
+  gameStarted = true;
   if (currentAnswer === currentQuote.answer) {
-      message.innerText = "🎉 Correct! Bravo!";
+      message.innerText = correctMessages[correctIndex];
       message.style.color = "green";
-      setTimeout(startNewRound, 2000);
-      win = win + 1;
+      correctIndex++;
+
+      // Reset and shuffle if all messages are used
+      if (correctIndex >= correctMessages.length) {
+          correctIndex = 0;
+          shuffleArray(correctMessages);
+      }
+      correctSound.play();
+      setTimeout(startNewRound, 2500);
+      win++;
   } else if (currentAnswer.length === currentQuote.answer.length) {
-      message.innerText = "❌ Mauvaise réponse, réessaie!";
+      message.innerText = wrongMessages[wrongIndex];
       message.style.color = "red";
-      lose = lose + 1;
+      wrongIndex++;
+
+      // Reset and shuffle if all messages are used
+      if (wrongIndex >= wrongMessages.length) {
+          wrongIndex = 0;
+          shuffleArray(wrongMessages);
+      }
+      wrongSound.play();
+      lose++;
+      setTimeout(startNewRound, 2500);
   }
 }
+
+
 
 function displayFinalMessage() {
   const resultMessage = document.querySelector("#result");
   if (!resultMessage) return;
 
+  gameStarted = true;
   if (usedQuotes.length === quotesByCategory[currentCategory].length){
   const message = document.querySelector("#message");
     if (message) {
-        message.innerText = "🎉 Félicitations ! Vous avez terminé toutes les citations !";
+        message.innerText = "🎉 Whoa! You’ve conquered all the quotes! Go flex on your friends! 💪😎";
         message.style.color = "blue";
+        finishSound.play();
+        setTimeout(() => {
+          window.location.href = "index.html"; 
+      }, 7000);
     }
   }
 
   if (win > 0 && lose > 0) {
-      resultMessage.innerText = `👏 Bravo! Vous avez gagné ${win} fois et appris ${lose} nouvelles citations !`;
+      resultMessage.innerText = `👏 Well played! You won ${win} times and lost ${lose} times. A true warrior! ⚔️`;
       resultMessage.style.color = "green";
   } else if (win > 0 && lose === 0) {
-      resultMessage.innerText = `🏆 Félicitations ! Vous avez gagné toutes les parties (${win} victoires) !`;
+      resultMessage.innerText = `🏆 Absolute legend! You crushed every round with ${win} wins! Are you even human? 🤖`;
       resultMessage.style.color = "gold";
   } else if (win === 0 && lose > 0) {
-      resultMessage.innerText = `😢 Dommage, vous avez perdu ${lose} fois. Ne lâchez rien !`;
+      resultMessage.innerText = `😢 Oof… ${lose} losses. But hey, even superheroes have bad days! Try again! 💪`;
       resultMessage.style.color = "red";
   }
 }
