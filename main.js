@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
       startGame("hamas");
   }
 
-  // Sécuriser l'ajout des écouteurs pour éviter les erreurs
+  // Sécuriser l'ajout des écouteurs pour éviter les erreurs, 3mi gpt mdhali 
   const btnOmc = document.querySelector(".omc");
   const btnBkri = document.querySelector(".bkri");
   const btnHamas = document.querySelector(".hamas");
@@ -106,7 +106,7 @@ function getRandomQuote() {
 }
 
 function startNewRound() {
-  // Si l'utilisateur n'a pas répondu et qu'il y avait une question en cours, on considère cette partie comme perdue
+  // Si l'utilisateur n a pas answer et il y avait une qst en cours, we considère cette partie comme lost
   if (currentAnswer.length === 0 && currentQuote) {
       lose++;
   }
@@ -115,7 +115,7 @@ function startNewRound() {
 
   if (!currentQuote) {
       displayFinalMessage();
-      return; // Arrête le jeu si plus de citations
+      return; 
   }
 
   currentAnswer = "";
@@ -244,7 +244,7 @@ function shuffleArray(array) {
   }
 }
 
-// Lists of messages
+// Lists t3 messages
 let correctMessages = [
   "🎉 Boom! Nailed it! You’re on fire! 🔥😎",
   "🌟 Genius mode activated! Keep it up! 🚀",
@@ -267,11 +267,11 @@ let wrongMessages = [
   "🥴 That was close… but nope!"
 ];
 
-// Shuffle the messages at the start
+
 shuffleArray(correctMessages);
 shuffleArray(wrongMessages);
 
-// Index trackers
+
 let correctIndex = 0;
 let wrongIndex = 0;
 
@@ -285,7 +285,6 @@ function checkGameStatus() {
       message.style.color = "green";
       correctIndex++;
 
-      // Reset and shuffle if all messages are used
       if (correctIndex >= correctMessages.length) {
           correctIndex = 0;
           shuffleArray(correctMessages);
@@ -298,7 +297,7 @@ function checkGameStatus() {
       message.style.color = "red";
       wrongIndex++;
 
-      // Reset and shuffle if all messages are used
+      // Reset
       if (wrongIndex >= wrongMessages.length) {
           wrongIndex = 0;
           shuffleArray(wrongMessages);

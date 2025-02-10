@@ -8,7 +8,7 @@ body {
   text-align: center;
 }
 
-/* Barre en haut */
+/* Barre 9alouha lfo9*/
 header {
   background-color: #0098FF;
   padding: 2vh;
@@ -207,7 +207,7 @@ button:hover {
   pointer-events: none;
 }
 
-/* Media Queries pour l'adaptation mobile */
+
 @media (max-width: 768px) {
   button {
     width: 60%;
